@@ -57,7 +57,6 @@ TW_CUSTOM_CLOCK_POS := 320
 ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
-#BUILD_BROKEN_PLUGIN_VALIDATION := soong-libguitwrp_defaults soong-libaosprecovery_defaults soong-libminuitwrp_defaults soong-vold_defaults
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
@@ -71,8 +70,6 @@ PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2099-12-31
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-TW_PREPARE_DATA_MEDIA_EARLY := true
-#TW_FORCE_KEYMASTER_VER := true
 
 # Kernel
 TARGET_NO_KERNEL := true
@@ -166,53 +163,13 @@ TARGET_INIT_VENDOR_LIB := libinit_KM7k
 TARGET_RECOVERY_DEVICE_MODULES := libinit_KM7k
 
 # TWRP Configurations
-TW_THEME := portrait_hdpi
-#TW_SCREEN_BLANK_ON_BOOT := true
-TW_NO_SCREEN_BLANK := true
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 295
-TW_DEFAULT_BRIGHTNESS := 180
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
-#TARGET_SYSTEM_PROP += $(LOCAL_PATH)/system.prop
-#TW_INCLUDE_PYTHON := true
 
 # Fastbootd
 TW_INCLUDE_FASTBOOTD := true
 
 # Debug
 TARGET_USES_LOGD := true
-TWRP_INCLUDE_LOGCAT := true
-#TWRP_EVENT_LOGGING := true
-
-# Tools
-#TW_OEM_BUILD := true
-TW_INCLUDE_RESETPROP := true
-TW_INCLUDE_REPACKTOOLS := true
-TW_INCLUDE_LIBRESETPROP := true
-#TW_ENABLE_ALL_PARTITION_TOOLS := true
-TW_INCLUDE_LPDUMP := true
-TW_INCLUDE_LPTOOLS := true
-TW_INCLUDE_FB2PNG := true
-RECOVERY_SDCARD_ON_DATA := true
-TW_HAS_MTP := true
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_EXCLUDE_APEX := true
-TW_EXCLUDE_TWRPAPP := true
-TW_INCLUDE_NTFS_3G := true
-TARGET_USES_MKE2FS := true
-TW_INCLUDE_FUSE_EXFAT := true
-#TW_INCLUDE_FUSE_NTFS  := true
-TW_EXTRA_LANGUAGES := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_LOAD_VENDOR_BOOT_MODULES := true
-TW_DEVICE_VERSION := KM7k_Novicio301129
-TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone28/temp"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
-#TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
-TW_BACKUP_EXCLUSIONS := /data/fonts
-#TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
-TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
 
 # Take a few libraries from sources
 TARGET_RECOVERY_DEVICE_MODULES += \

@@ -1,17 +1,7 @@
 #
-# Copyright (C) 2022 The TWRP Open Source Project
+# Copyright (C) 2026 The LineageOS Project
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# SPDX-License-Identifier: Apache-2.0
 #
 
 DEVICE_PATH := device/tecno/KM7k
@@ -42,41 +32,25 @@ TARGET_BOOTLOADER_BOARD_NAME := TECNO-KM7k
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
-# Boot animation
+# Display & Resolution
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080
-
-# Display
 TARGET_SCREEN_DENSITY := 360
 
-# StatusBar
-TW_STATUS_ICONS_ALIGN := center
-TW_CUSTOM_CLOCK_POS := 320
-
-# For building with minimal manifest
+# Build Environment Fixes
 ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
-# Crypto
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
+# Crypto & Metadata
 BOARD_USES_METADATA_PARTITION := true
-TW_USE_FSCRYPT_POLICY := 2
-#PLATFORM_VERSION := 12
-PLATFORM_VERSION := 99.87.36
-PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
-PLATFORM_SECURITY_PATCH := 2099-12-31
-BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
-# Kernel
-TARGET_NO_KERNEL := true
+# Kernel Configuration (Gamit ang prebuilt kernel mula sa stock boot/vendor_boot kung wala pang kernel source)
+TARGET_NO_KERNEL := false
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_KERNEL_SEPARATED_DTBO := true
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
-#TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
 BOARD_VENDOR_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_BASE := 0x3fff8000
 BOARD_PAGE_SIZE := 4096
@@ -127,54 +101,17 @@ BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
-# Filesystem
-#BOARD_ROOT_EXTRA_FOLDERS += metadata
+# Filesystem Extra Folders
 BOARD_ROOT_EXTRA_FOLDERS += tranfs
 
-# Platform
+# Platform (MediaTek Helio G200 / MT6789)
 TARGET_BOARD_PLATFORM := mt6789
 
-# Properties
-#TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-
-# Recovery
-#USE_RECOVERY_INSTALLER := true
-TW_SKIP_ADDITIONAL_FSTAB := true
-TARGET_NO_RECOVERY := true
-BOARD_HAS_LARGE_FILESYSTEM := true
-#BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_SUPPRESS_SECURE_ERASE := true
-TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
-TW_FRAMERATE := 144
-
-# Vendor_boot recovery ramdisk
-BOARD_USES_RECOVERY_AS_BOOT := 
+# AVB & Init
+BOARD_AVB_ENABLE := true
+TARGET_INIT_VENDOR_LIB := libinit_KM7k
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
-#BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
-BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := 
-BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT :=
-
-# AVB
-BOARD_AVB_ENABLE := true
-
-# Init
-TARGET_INIT_VENDOR_LIB := libinit_KM7k
-TARGET_RECOVERY_DEVICE_MODULES := libinit_KM7k
-
-# TWRP Configurations
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
-
-# Fastbootd
-TW_INCLUDE_FASTBOOTD := true
-
-# Debug
+BOARD_SUPPRESS_SECURE_ERASE := true
+BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USES_LOGD := true
-
-# Take a few libraries from sources
-TARGET_RECOVERY_DEVICE_MODULES += \
-    android.hidl.safe_union@1.0
-        
-RECOVERY_LIBRARY_SOURCE_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.safe_union@1.0.so
-

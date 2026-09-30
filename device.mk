@@ -53,11 +53,11 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
     FILESYSTEM_TYPE_vendor=erofs \
     POSTINSTALL_OPTIONAL_vendor=true
-    
+
 PRODUCT_PACKAGES += \
     otapreopt_script \
     cppreopts.sh
-    
+
 # Update engine
 PRODUCT_PACKAGES += \
     update_engine \
@@ -66,14 +66,14 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
-    
+
 # Additional Target Libraries
 TARGET_RECOVERY_DEVICE_MODULES += \
     libion
 
 TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
-    
+
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl \
@@ -82,12 +82,12 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES_DEBUG += \
     bootctrl
-    
+
 # Fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
     fastbootd
-    
+
 # Health
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
@@ -100,7 +100,7 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PACKAGES += \
     mtk_plpath_utils \
     mtk_plpath_utils.recovery
-    
+
 # Otacert
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     $(DEVICE_PATH)/security/releasekey
@@ -110,11 +110,15 @@ PRODUCT_EXTRA_RECOVERY_KEYS += \
 
 # Vendor ramdisk
 PRODUCT_COPY_FILES += \
-     device/tecno/KM7k/fstab.emmc:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.emmc \
-     device/tecno/KM7k/rootdir/etc/fstab.mt6789:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6789
-     
-#PRODUCT_PACKAGES += linker.vendor_ramdisk shell_vendor_ramdisk
+    $(DEVICE_PATH)/fstab.emmc:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.emmc \
+    $(DEVICE_PATH)/rootdir/etc/fstab.mt6789:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6789
 
+# Recovery Rootdir Prebuilts (Mga inilipat na .rc files)
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/rootdir/init.recovery.mt6789.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.mt6789.rc \
+    $(DEVICE_PATH)/rootdir/init.recovery.usb.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.usb.rc \
+    $(DEVICE_PATH)/rootdir/tee.rc:$(TARGET_COPY_OUT_RECOVERY)/root/tee.rc \
+    $(DEVICE_PATH)/rootdir/trustonic.rc:$(TARGET_COPY_OUT_RECOVERY)/root/trustonic.rc
 
 # --- Modern Rootdir Prebuilts Integration ---
 PRODUCT_PACKAGES += \
@@ -126,7 +130,6 @@ PRODUCT_PACKAGES += \
     init.mt6789.rc \
     init.mtkgki.rc \
     init.project.rc \
-    init.recovery.usb.rc \
     init.sensor_2_0.rc \
     ueventd.mt6789.rc \
     init.insmod.sh

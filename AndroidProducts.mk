@@ -14,6 +14,4 @@
 # limitations under the License.
 #
 
-PRODUCT_MAKEFILES := $(LOCAL_DIR)/twrp_KM7k.mk
-
-COMMON_LUNCH_CHOICES := twrp_KM7k-eng
+PRODUCT_MAKEFILES := $(LOCAL_DIR)/lineage_KM7k.mk

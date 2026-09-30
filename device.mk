@@ -111,7 +111,22 @@ PRODUCT_EXTRA_RECOVERY_KEYS += \
 # Vendor ramdisk
 PRODUCT_COPY_FILES += \
      device/tecno/KM7k/fstab.emmc:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.emmc \
-     device/tecno/KM7k/fstab.mt6789:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6789
+     device/tecno/KM7k/rootdir/etc/fstab.mt6789:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6789
      
 #PRODUCT_PACKAGES += linker.vendor_ramdisk shell_vendor_ramdisk
 
+
+# --- Modern Rootdir Prebuilts Integration ---
+PRODUCT_PACKAGES += \
+    init_connectivity.rc \
+    init.mt6789.power.rc \
+    init.connectivity.common.rc \
+    init.insmod.mt6789.cfg \
+    init.modem.rc \
+    init.mt6789.rc \
+    init.mtkgki.rc \
+    init.project.rc \
+    init.recovery.usb.rc \
+    init.sensor_2_0.rc \
+    ueventd.mt6789.rc \
+    init.insmod.sh
